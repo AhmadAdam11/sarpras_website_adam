@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\BarangApiController;
 use App\Http\Controllers\RegisterUserController;
 use App\Http\Controllers\Auth\UserLoginController;
 use Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful;
+use App\Http\Controllers\Api\PeminjamanController;
 
 Route::post('login', [AdminController::class, 'login']);
 Route::middleware([EnsureFrontendRequestsAreStateful::class])->post('/logout', [AdminController::class, 'logout']);
@@ -15,5 +16,8 @@ Route::get('/barang', [BarangApiController::class, 'index']);
 
 Route::post('/register', [RegisterUserController::class, 'register']);
 Route::post('login', [UserLoginController::class, 'login']);
+
+
+Route::middleware('auth:sanctum')->post('/peminjaman', [PeminjamanController::class, 'store']);
 
 

@@ -6,6 +6,7 @@ use App\Http\Controllers\BarangController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\RegisterUserController;
 use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\Admin\PeminjamanController;
 
 Route::get('/login', fn () => view('login'));
 Route::post('/login', [AdminController::class, 'login'])->name('login');
@@ -23,8 +24,13 @@ Route::middleware('auth')->group(function () {
     Route::resource('kategori', KategoriController::class);
 
 
+
 });
 
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('peminjamans', [PeminjamanController::class, 'index'])->name('peminjamans.index');
+    Route::post('peminjamans/{id}/status/{status}', [PeminjamanController::class, 'updateStatus'])->name('peminjamans.updateStatus');
+});
 
 
 

@@ -14,34 +14,33 @@ class UserLoginController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function login(Request $request)
-    {
-        // Validasi input
-        $request->validate([
-            'name' => 'required|string',
-            'password' => 'required|string',
-        ]);
-
-        // Mencari user berdasarkan name
-        $user = User::where('name', $request->name)->first();
-
-        // Cek apakah user ada dan passwordnya cocok
-        if ($user && Hash::check($request->password, $user->password)) {
-            // Jika login berhasil, buatkan token
-            $token = $user->createToken('YourAppName')->plainTextToken;
-
-            //   token dalam response JSON
-            return response()->json([
-                'message' => 'Login berhasil!',
-                'token' => $token
+        public function login(Request $request)
+        {
+            $request->validate([
+                'name' => 'required|string',
+                'password' => 'required|string',
             ]);
+
+            $user = User::where('name', $request->name)->first();
+
+            if ($user && Hash::check($request->password, $user->password)) {
+                $token = $user->createToken('YourAppName')->plainTextToken;
+
+                return response()->json([
+                    'message' => 'Login berhasil!',
+                    'token' => $token,
+                    'user' => [
+                        'id' => $user->id,
+                        'name' => $user->name,
+                    ]
+                ]);
+            }
+
+            return response()->json([
+                'error' => 'Unauthorized',
+                'message' => 'Nama atau password salah!'
+            ], 401);
         }
 
-        // Jika login gagal, return error
-        return response()->json([
-            'error' => 'Unauthorized', 
-            'message' => 'Nama atau password salah!'
-        ], 401);
-    }
 }
 

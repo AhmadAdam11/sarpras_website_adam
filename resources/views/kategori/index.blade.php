@@ -4,7 +4,7 @@
     <h1>Kategori Barang</h1>
     <a href="{{ route('kategori.create') }}">Tambah Kategori</a>
 
-    <table border="1">
+    <table>
         <thead>
             <tr>
                 <th>Nama Kategori</th>
@@ -17,7 +17,7 @@
                     <td>{{ $kategori->nama }}</td>
                     <td>
                         <a href="{{ route('kategori.edit', $kategori->id) }}">Edit</a> |
-                        <form action="{{ route('kategori.destroy', $kategori->id) }}" method="POST" style="display:inline;">
+                        <form action="{{ route('kategori.destroy', $kategori->id) }}" method="POST" class="delete-form" onsubmit="return confirm('Yakin ingin menghapus kategori ini?')">
                             @csrf
                             @method('DELETE')
                             <button type="submit">Hapus</button>

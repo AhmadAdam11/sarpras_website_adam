@@ -33,7 +33,7 @@ class RegisterUserController extends Controller
 
         // Bisa disimpan dalam session atau dikirim ke frontend
         // Misalnya, di sini kita bisa mengarahkan ke halaman dengan token
-        return redirect()->back()->with('success', 'User berhasil ditambahkan! Token: ' . $token);
+        return redirect()->back()->with('success', 'User di tambahkan!');
     }
 
     // Update user

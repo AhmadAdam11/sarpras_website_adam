@@ -20,11 +20,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/barang/create', [BarangController::class, 'create']);
     Route::put('/barang/{id}/update', [BarangController::class, 'update']);
     Route::delete('/barang/{id}/delete', [BarangController::class, 'delete']);
-    
     Route::resource('kategori', KategoriController::class);
-
-
-
 });
 
 Route::prefix('admin')->name('admin.')->group(function () {

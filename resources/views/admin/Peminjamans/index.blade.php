@@ -7,9 +7,10 @@
 <table class="table table-bordered">
     <thead>
         <tr>
-            <th>ID</th>
+            <th>ID Peminjaman</th>
             <th>User</th>
             <th>Barang</th>
+            <th>Jumlah</th> <!-- Tambahan kolom jumlah -->
             <th>Waktu</th>
             <th>Tanggal Pinjam</th>
             <th>Rencana Kembali</th>
@@ -23,6 +24,7 @@
                 <td>{{ $peminjaman->id }}</td>
                 <td>{{ $peminjaman->user->name ?? '-' }}</td>
                 <td>{{ $peminjaman->barang->name ?? '-' }}</td>
+                <td>{{ $peminjaman->jumlah }}</td> <!-- Tampilkan jumlah -->
                 <td>{{ $peminjaman->waktu }}</td>
                 <td>{{ \Carbon\Carbon::parse($peminjaman->tanggal_pinjam)->format('d-m-Y') }}</td>
                 <td>{{ \Carbon\Carbon::parse($peminjaman->rencana_kembali)->format('d-m-Y') }}</td>
@@ -44,7 +46,7 @@
                 </td>
             </tr>
         @empty
-            <tr><td colspan="8" class="text-center">Tidak ada data peminjaman</td></tr>
+            <tr><td colspan="9" class="text-center">Tidak ada data peminjaman</td></tr>
         @endforelse
     </tbody>
 </table>

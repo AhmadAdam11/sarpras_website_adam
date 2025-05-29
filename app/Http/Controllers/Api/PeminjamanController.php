@@ -8,9 +8,20 @@ use Laravel\Sanctum\PersonalAccessToken;
 
 class PeminjamanController extends Controller
 {
+
+   public function index()
+{
+    // Ambil semua data peminjaman, termasuk relasi barang jika ada
+    $peminjaman = \App\Models\Peminjaman::with('barang')->orderBy('created_at', 'desc')->get();
+
+    return response()->json([
+        'message' => 'Daftar semua peminjaman berhasil diambil',
+        'data' => $peminjaman
+    ]);
+}
+
     public function store(Request $request)
 {
-    // Ambil token dari header Authorization Bearer
     $tokenString = $request->bearerToken();
 
     if (!$tokenString) {
@@ -37,13 +48,13 @@ class PeminjamanController extends Controller
         'waktu' => 'required|string',
         'tanggal_pinjam' => 'required|date',
         'rencana_kembali' => 'required|date',
+        'jumlah' => 'required|integer|min:1',
     ]);
 
-    // Tambahkan user_id dan status
+  
     $validated['user_id'] = $user->id;
-    $validated['status'] = 'pending'; // ✅ agar tidak null
+    $validated['status'] = 'pending';
 
-    // Simpan ke DB
     $peminjaman = Peminjaman::create($validated);
 
     return response()->json([
@@ -51,5 +62,22 @@ class PeminjamanController extends Controller
         'data' => $peminjaman
     ]);
 }
+
+//buat cek postman
+public function userPeminjaman(Request $request)
+{
+    $user = $request->user();
+
+    $peminjamans = Peminjaman::with('barang')
+        ->where('user_id', $user->id)
+        ->orderBy('created_at', 'desc')
+        ->get();
+
+    return response()->json([
+        'message' => 'Riwayat peminjaman berhasil diambil',
+        'data' => $peminjamans
+    ]);
+}
+
 
 }

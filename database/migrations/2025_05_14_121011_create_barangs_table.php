@@ -15,13 +15,13 @@ return new class extends Migration
             $table->id();
             $table->string('name')->nullable();
             $table->string('gambar');
-            $table->unsignedBigInteger('kategori_id'); // Foreign key untuk kategori
+            $table->unsignedBigInteger('kategori_id'); 
             $table->integer('stok');
             $table->timestamps();
 
-            $table->foreign('kategori_id') // Menambahkan constraint foreign key
-                  ->references('id')->on('kategoris') // Mengarah ke tabel kategoris
-                  ->onDelete('cascade'); // Jika kategori dihapus, barang terkait juga akan terhapus
+            $table->foreign('kategori_id') 
+                  ->references('id')->on('kategoris')
+                  ->onDelete('cascade'); 
         });
     }
 

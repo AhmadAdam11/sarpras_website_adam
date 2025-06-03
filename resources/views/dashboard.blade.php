@@ -4,7 +4,7 @@
   <div class="dash-hello">
     <h1>Dashboard</h1>
   </div>
-  <main class="content">
+  <main class="content_dashboard">
     <div class="row">
       <div class="col-md-4">
         <div class="dash-card">

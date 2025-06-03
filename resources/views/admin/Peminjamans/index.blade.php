@@ -3,50 +3,57 @@
 @section('title', 'Data Peminjaman')
 
 @section('content')
-<h1>Data Peminjaman</h1>
-<table class="table table-bordered">
-    <thead>
+<h1 class="text-xl font-bold mb-4">Data Peminjaman</h1>
+
+<table class="min-w-full border border-gray-300 text-sm">
+    <thead class="bg-gray-100">
         <tr>
-            <th>ID Peminjaman</th>
-            <th>User</th>
-            <th>Barang</th>
-            <th>Jumlah</th> <!-- Tambahan kolom jumlah -->
-            <th>Waktu</th>
-            <th>Tanggal Pinjam</th>
-            <th>Rencana Kembali</th>
-            <th>Status</th>
-            <th>Aksi</th>
+            <th class="p-2 border">ID Peminjaman</th>
+            <th class="p-2 border">User</th>
+            <th class="p-2 border">Barang</th>
+            <th class="p-2 border">Jumlah</th>
+            <th class="p-2 border">Waktu</th>
+            <th class="p-2 border">Tanggal Pinjam</th>
+            <th class="p-2 border">Rencana Kembali</th>
+            <th class="p-2 border">Status</th>
+            <th class="p-2 border">Aksi</th>
         </tr>
     </thead>
     <tbody>
         @forelse ($peminjamans as $peminjaman)
-            <tr>
-                <td>{{ $peminjaman->id }}</td>
-                <td>{{ $peminjaman->user->name ?? '-' }}</td>
-                <td>{{ $peminjaman->barang->name ?? '-' }}</td>
-                <td>{{ $peminjaman->jumlah }}</td> <!-- Tampilkan jumlah -->
-                <td>{{ $peminjaman->waktu }}</td>
-                <td>{{ \Carbon\Carbon::parse($peminjaman->tanggal_pinjam)->format('d-m-Y') }}</td>
-                <td>{{ \Carbon\Carbon::parse($peminjaman->rencana_kembali)->format('d-m-Y') }}</td>
-                <td>{{ ucfirst($peminjaman->status) }}</td>
-                <td>
-                    @if($peminjaman->status == 'pending')
-                        <form action="{{ route('admin.peminjamans.updateStatus', ['id' => $peminjaman->id, 'status' => 'disetujui']) }}" method="POST" style="display:inline;">
-                            @csrf
-                            <button type="submit" class="btn btn-success btn-sm" onclick="return confirm('Setujui peminjaman ini?')">Setujui</button>
-                        </form>
+            <tr class="hover:bg-gray-50">
+                <td class="p-2 border">{{ $peminjaman->id }}</td>
+                <td class="p-2 border">{{ $peminjaman->user->name ?? '-' }}</td>
+                <td class="p-2 border">{{ $peminjaman->barang->name ?? '-' }}</td>
+                <td class="p-2 border">{{ $peminjaman->jumlah }}</td>
+                <td class="p-2 border">{{ $peminjaman->waktu }}</td>
+                <td class="p-2 border">{{ \Carbon\Carbon::parse($peminjaman->tanggal_pinjam)->format('d-m-Y') }}</td>
+                <td class="p-2 border">{{ \Carbon\Carbon::parse($peminjaman->rencana_kembali)->format('d-m-Y') }}</td>
+                <td class="p-2 border">{{ ucfirst($peminjaman->status) }}</td>
+<td>
+    @if($peminjaman->status == 'pending')
+        <div class="peminjaman-action-buttons">
+            <form action="{{ route('admin.peminjamans.updateStatus', ['id' => $peminjaman->id, 'status' => 'disetujui']) }}" method="POST">
+                @csrf
+                <button type="submit" class="approve-btn" onclick="return confirm('Setujui peminjaman ini?')">Setujui</button>
+            </form>
 
-                        <form action="{{ route('admin.peminjamans.updateStatus', ['id' => $peminjaman->id, 'status' => 'ditolak']) }}" method="POST" style="display:inline;">
-                            @csrf
-                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Tolak peminjaman ini?')">Tolak</button>
-                        </form>
-                    @else
-                        <span class="text-muted">Tindakan selesai</span>
-                    @endif
-                </td>
+            <form action="{{ route('admin.peminjamans.updateStatus', ['id' => $peminjaman->id, 'status' => 'ditolak']) }}" method="POST">
+                @csrf
+                <button type="submit" class="reject-btn" onclick="return confirm('Tolak peminjaman ini?')">Tolak</button>
+            </form>
+        </div>
+    @else
+        <span class="text-muted">Tindakan selesai</span>
+    @endif
+</td>
+
+
             </tr>
         @empty
-            <tr><td colspan="9" class="text-center">Tidak ada data peminjaman</td></tr>
+            <tr>
+                <td colspan="9" class="text-center p-4 text-gray-500">Tidak ada data peminjaman</td>
+            </tr>
         @endforelse
     </tbody>
 </table>

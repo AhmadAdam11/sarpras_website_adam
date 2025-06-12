@@ -20,6 +20,12 @@
     @if(session('success'))
         <div class="alert">{{ session('success') }}</div>
     @endif
+    
+ <a href="{{ url('/export-user') }}" 
+   class="btn-primary" 
+   style="margin: 10px 0; padding: 8px 12px; background-color: blue; color: white; text-decoration: none; border-radius: 5px; display: inline-block;">
+    Download Excel
+</a>
 
     <form action="{{ route('users.store') }}" method="POST" class="form-tambah-user">
         @csrf

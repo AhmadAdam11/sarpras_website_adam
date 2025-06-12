@@ -648,7 +648,6 @@
 
 /* ========== CSS KHUSUS PENGEMBALIAN ========== */
 
-/* Reset untuk menghindari konflik dengan nav */
 .pengembalian-container {
     max-width: 1200px;
     margin: 20px auto;
@@ -751,8 +750,8 @@
 }
 
 .status-selesai {
-    background: linear-gradient(135deg, #2ecc71, #27ae60);
-    color: white;
+    background-color: #27ae60; /* Lebih gelap dari #2ecc71 */
+    color: #ffffff !important;
     padding: 6px 12px;
     border-radius: 20px;
     font-size: 12px;
@@ -763,7 +762,7 @@
 }
 
 .status-pending {
-    background: linear-gradient(135deg, #f39c12, #e67e22);
+    background-color: #e67e22; /* Orange solid */
     color: white;
     padding: 6px 12px;
     border-radius: 20px;
@@ -773,6 +772,7 @@
     display: inline-block;
     min-width: 80px;
 }
+
 
 .denda-amount {
     font-weight: 600;

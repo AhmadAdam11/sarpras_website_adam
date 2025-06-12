@@ -7,7 +7,9 @@ use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\RegisterUserController;
 use App\Http\Controllers\Admin\PeminjamanController;
+use App\Http\Controllers\Excel\UserExportController;
 use App\Http\Controllers\Admin\PengembalianController;
+use App\Http\Controllers\Excel\BarangExportController;
 
 // Login & Logout
 Route::get('/login', fn () => view('login'));
@@ -22,12 +24,16 @@ Route::middleware('auth')->group(function () {
 
     // User Register (via admin)
     Route::get('/register', [RegisterUserController::class, 'index'])->name('register.index');
+    Route::get('/export-user', [UserExportController::class, 'export'])->name('export.user');
+
 
     // Barang
     Route::get('/barang', [BarangController::class, 'index'])->name('barang.index');
     Route::post('/barang/create', [BarangController::class, 'create']);
     Route::put('/barang/{id}/update', [BarangController::class, 'update']);
     Route::delete('/barang/{id}/delete', [BarangController::class, 'delete']);
+    Route::get('/export-barang', [BarangExportController::class, 'export']);
+
 
     // Kategori
     Route::resource('kategori', KategoriController::class);

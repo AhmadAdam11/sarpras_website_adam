@@ -1,9 +1,13 @@
 @extends('nav')
 
 @section('content')
-    <div class="daftar">
+    <div class="daftar" style="display: flex; justify-content: space-between; align-items: center;">
         <h1>Daftar Barang</h1>
+        <a href="{{ url('/export-barang') }}" class="btn-primary" style="padding: 8px 12px; background-color: blue; color: white; text-decoration: none; border-radius: 5px;">
+            Download Excel
+        </a>
     </div>
+
     
     <!-- Form Tambah Barang -->
     <form id="barangForm" enctype="multipart/form-data">

@@ -30,4 +30,10 @@ class Peminjaman extends Model
     {
         return $this->belongsTo(barang::class);
     }
+
+    public function pengembalian()
+    {
+    return $this->hasOne(\App\Models\Pengembalian::class);
+    }
+
 }

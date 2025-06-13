@@ -19,12 +19,10 @@ class PeminjamanController extends Controller
         $peminjaman = Peminjaman::with('barang')->findOrFail($id);
 
         if ($status === 'disetujui') {
-            // Cek apakah stok cukup
             if ($peminjaman->jumlah > $peminjaman->barang->stok) {
                 return redirect()->back()->with('error', 'Stok barang tidak mencukupi!');
             }
 
-            // Kurangi stok barang
             $peminjaman->barang->stok -= $peminjaman->jumlah;
             $peminjaman->barang->save();
         }

@@ -29,41 +29,30 @@
                     <td>{{ $item->peminjaman->barang->name ?? '-' }}</td>
                     <td>{{ $item->tanggal_kembali }}</td>
 
-                    <form action="{{ route('pengembalian.update', $item->id) }}" method="POST">
-                        @csrf
-                        @method('PUT')
-
-                        <td>
-                            @if($item->selesai)
-                                Rp {{ number_format($item->denda, 0, ',', '.') }}
-                            @else
-                                <input type="number" name="denda" value="{{ $item->denda }}" class="pengembalian-input" min="0">
-                            @endif
-                        </td>
-
-
-                        <td>
-                            @if($item->selesai)
-                                {{ ucfirst($item->kondisi_setelah) }}
-                            @else
-                                <select name="kondisi_setelah" class="pengembalian-select">
+                    @if($item->selesai)
+                        <td>Rp {{ number_format($item->denda, 0, ',', '.') }}</td>
+                        <td>{{ ucfirst($item->kondisi_setelah) }}</td>
+                        <td><span class="status-selesai">Terkunci</span></td>
+                    @else
+                        <form action="{{ route('pengembalian.update', $item->id) }}" method="POST">
+                            @csrf
+                            @method('PUT')
+                            <td>
+                                <input type="number" name="denda" value="{{ $item->denda }}" class="pengembalian-input" min="0" required>
+                            </td>
+                            <td>
+                                <select name="kondisi_setelah" class="pengembalian-select" required>
                                     <option value="">-- Pilih Kondisi --</option>
                                     <option value="baru" {{ $item->kondisi_setelah == 'baru' ? 'selected' : '' }}>Baru</option>
                                     <option value="baik" {{ $item->kondisi_setelah == 'baik' ? 'selected' : '' }}>Baik</option>
                                     <option value="rusak" {{ $item->kondisi_setelah == 'rusak' ? 'selected' : '' }}>Rusak</option>
                                 </select>
-                            @endif
-                        </td>
-
-                    <td>
-                        @if(!$item->selesai)
-                            <button type="submit" class="btn-mini-selesai">Selesaikan Aksi</button>
-                        @else
-                            <span class="status-selesai">Terkunci</span>
-                        @endif
-                    </td>
-
-                    </form>
+                            </td>
+                            <td>
+                                <button type="submit" class="btn-mini-selesai">Selesaikan Aksi</button>
+                            </td>
+                        </form>
+                    @endif
 
                     <td>
                         @if($item->selesai)

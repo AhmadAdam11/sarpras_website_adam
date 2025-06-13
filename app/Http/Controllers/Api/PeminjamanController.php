@@ -62,7 +62,6 @@ class PeminjamanController extends Controller
         ]);
     }
 
-    // Untuk user: menampilkan riwayat peminjaman mereka sendiri
     public function userPeminjaman(Request $request)
     {
         $user = $request->user();

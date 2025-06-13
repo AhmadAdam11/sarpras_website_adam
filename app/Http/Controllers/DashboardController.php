@@ -2,18 +2,28 @@
 namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Barang;
-use App\Models\Peminjaman;
 use App\Http\Controllers;
+use App\Models\Peminjaman;
+use App\Models\LogAktivitas;
 
 class DashboardController extends Controller
 {
-    public function index()
-    {
-        $jumlahUser = User::count();
-        $jumlahBarang = Barang::count();
-        // $jumlahPeminjam = Peminjaman::count();
+public function index()
+{
+    $jumlahUser = User::count();
+    $jumlahBarang = Barang::count();
+    $jumlahPeminjaman = Peminjaman::count();
 
-        return view('dashboard', compact('jumlahUser', 'jumlahBarang'));
-    }
+    $logAktivitas = LogAktivitas::orderBy('created_at', 'desc')
+                    ->limit(5)
+                    ->get();
+
+    return view('dashboard', compact(
+        'jumlahUser',
+        'jumlahBarang',
+        'jumlahPeminjaman',
+        'logAktivitas'
+    ));
+}
 
 }

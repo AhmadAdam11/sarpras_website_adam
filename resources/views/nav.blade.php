@@ -380,78 +380,7 @@
 
     /* card dashboard */
 
-    .dash-hello h1 {
-      margin-left: 60px;
-      font-size: 28px;
-      font-weight: 700;
-      color:rgb(0, 0, 0);
-      margin-top: -30px;
-    }
-
-    /* Row Container - Cards Sebelahan */
-    .row {
-      display: flex;
-      gap: 20px;
-      flex-wrap: nowrap;
-      justify-content: center;
-      margin-top: 20px;
-      align-items: stretch;
-    }
-
-    .col-md-4 {
-      flex: 1;
-      display: flex;
-    }
-
-    .dash-card {
-      background-color: #f7f9fc;
-      border: 1.5px solid #1e398f;
-      border-radius: 12px;
-      padding: 25px 60px;
-      width: 100%; 
-      box-shadow: 0 4px 8px rgba(30, 57, 143, 0.12);
-      transition: all 0.3s ease;
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      position: relative;
-      overflow: hidden;
-      margin-top: 50px;
-      margin-left: 25px;
-    }
-
-    .dash-card:hover {
-      box-shadow: 0 8px 20px rgba(30, 57, 143, 0.25);
-      transform: translateY(-3px);
-      border-color: #2a4cb8;
-    }
-
-    .dash-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 4px;
-      background: linear-gradient(90deg, #1e398f, #2a4cb8);
-    }
-
-
-    .dash-card h4 {
-      margin-bottom: 12px;
-      font-size: 16px;
-      font-weight: 600;
-      color: #1e398f;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      opacity: 0.8;
-    }
-
-
-    .content_dashboard{
-      padding: 0 20px;
-    }
+   
 
     /* kategori create */
 
